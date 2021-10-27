@@ -1,0 +1,10 @@
+<ng-container *ngFor="let product of products">
+  <button
+    class="example-button-row"
+    mat-raised-button
+    color="primary"
+    (click)="addProduct(product.definitionUrl)"
+  >
+    Add {{ product.name }}
+  </button>
+</ng-container>

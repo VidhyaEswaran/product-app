@@ -1,0 +1,92 @@
+<ng-container *ngIf="productForm">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="example-form">
+    <h4>Enter Details</h4>
+    <div *ngFor="let formElement of formData">
+      <div [ngSwitch]="formElement.type">
+        <div *ngSwitchCase="'text'">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>{{ formElement.caption }}</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="{{ formElement.caption }}"
+            />
+            <mat-error *ngIf="formElement.mandatory">
+              {{ formElement.validationMessage }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngSwitchCase="'int'">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>{{ formElement.caption }}</mat-label>
+            <input
+              type="number"
+              matInput
+              formControlName="{{ formElement.caption }}"
+            />
+            <mat-error *ngIf="formElement.mandatory">
+              {{ formElement.validationMessage }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngSwitchCase="'bool'">
+          <mat-checkbox
+            class="example-margin"
+            formControlName="{{ formElement.caption }}"
+            >{{ formElement.caption }}</mat-checkbox
+          >
+        </div>
+      </div>
+    </div>
+    <button class="submitButton" mat-raised-button color="accent" type="submit">
+      Save
+    </button>
+    <button
+      class="submitButton"
+      mat-raised-button
+      color="accent"
+      type="reset"
+      (click)="clear()"
+    >
+      Reset
+    </button>
+    <button
+      class="submitButton"
+      mat-raised-button
+      color="accent"
+      (click)="back()"
+    >
+      Back
+    </button>
+  </form>
+</ng-container>
+
+<mat-card *ngIf="result?.Name" class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{ result.Name }}</mat-card-title>
+    <mat-card-subtitle>{{
+      result.IsSmart ? "Smart" : "Non Smart"
+    }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{ result.Description }}
+    </p>
+    <h6>Height: {{ result.Height }} | Width: {{ result.Width }}</h6>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="result?.Model" class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{ result.Model }}</mat-card-title>
+    <mat-card-subtitle>{{
+      result.IsTouch ? "Touch" : "Non Touch"
+    }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{ result.Platform }}
+    </p>
+    <h6>RAM: {{ result.RAM }} | Processor: {{ result.Processor }}</h6>
+  </mat-card-content>
+</mat-card>
